@@ -104,10 +104,41 @@ namespace JabApiLib.JavaAccessBridge
         private static List<AccessibleTreeItem> screenContents = new List<AccessibleTreeItem>();
         public static string screenContentsString = string.Empty;
 
-        public static AccessibleTreeItem GetComponentTreeByTitle(String title, out Int32 vmID)
+        public static AccessibleTreeItem GetComponentTreeByTitle(String title, out Int32 vmID, long timeoutMilliSecond = 30000)
         {
-            IntPtr hwnd = FindWindowByCaption(IntPtr.Zero, title);
-            return GetComponentTree(hwnd, out vmID);
+            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
+            try
+            {
+                IntPtr hwnd = IntPtr.Zero;
+                while (hwnd == IntPtr.Zero)
+                {
+                    hwnd = FindWindowByCaption(IntPtr.Zero, title);
+                    System.Threading.Thread.Sleep(500);
+                    if ((hwnd == IntPtr.Zero) && (sw.ElapsedMilliseconds > timeoutMilliSecond))
+                    {
+                        throw new Exception($"{title}のウィンドウが見つかりませんでした。");
+                    }
+                }
+                JabHelpers.AccessibleTreeItem tree = null;
+                vmID = 0;
+                while (tree == null)
+                {
+                    JabHelpers.Init();
+                    tree = GetComponentTree(hwnd, out vmID);
+                    System.Threading.Thread.Sleep(500);
+                    if ((tree == null) && (sw.ElapsedMilliseconds > timeoutMilliSecond))
+                    {
+                        throw new Exception($"{title}のComponentTreeが見つかりませんでした。");
+                    }
+                }
+                return tree;
+            }
+            finally
+            {
+                sw.Stop();
+            }
+
         }
 
         public static AccessibleTreeItem GetComponentTree(IntPtr hWnd, out Int32 vmID)
@@ -122,10 +153,11 @@ namespace JabApiLib.JavaAccessBridge
                 unsafe
                 {
                     IntPtr acPtr;
+                    //long apPtrLong;
 
-                    if (JabApi.getAccessibleContextFromHWND(hWnd, out vmID, out acPtr))
+                    if (JabApi.getAccessibleContextFromHWND(hWnd, out vmID, out acPtr) == false )
                     {
-
+                      //  acPtr = (IntPtr)apPtrLong;
                         AccessibleContextInfo ac = new AccessibleContextInfo();
                         accessibleTreeItem = GetAccessibleContextInfo(vmID, acPtr, out ac, null, 0, string.Empty); // RECURSION SEED
 
