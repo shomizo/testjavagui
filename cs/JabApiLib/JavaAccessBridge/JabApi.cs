@@ -377,53 +377,53 @@ namespace JabApiLib.JavaAccessBridge
 
         //Returns handle from ac
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-        public extern static unsafe IntPtr getHWNDFromAccessibleContext(Int32 vmID, IntPtr ac);
+        public extern static unsafe IntPtr getHWNDFromAccessibleContext(Int32 vmID, Int64 ac);
 
         //Compares two objects
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-        public extern static unsafe Boolean isSameObject(Int32 vmID, IntPtr ac1, IntPtr ac2);
+        public extern static unsafe Boolean isSameObject(Int32 vmID, Int64 ac1, Int64 ac2);
 
         //Returns an AccessibleContext object that represents the point given, offset by window coordinates.
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-        public extern static unsafe Boolean getAccessibleContextAt(Int32 vmID, IntPtr acparent, Int32 x, Int32 y, out IntPtr ac);
+        public extern static unsafe Boolean getAccessibleContextAt(Int32 vmID, Int64 acparent, Int32 x, Int32 y, out Int64 ac);
 
         //Returns an AccessibleContext object that represents the nth child of the object ac, where n is specified by the value index.
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-        public extern static unsafe IntPtr getAccessibleChildFromContext(Int32 vmID, IntPtr ac, Int32 index);
+        public extern static unsafe Int64 getAccessibleChildFromContext(Int32 vmID, Int64 ac, Int32 index);
 
         //Returns an AccessibleContext object that represents the window with focus.
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-        public extern static unsafe Boolean getAccessibleContextWithFocus(void* window, out Int32 vmID, out IntPtr ac);
+        public extern static unsafe Boolean getAccessibleContextWithFocus(void* window, out Int32 vmID, out Int64 ac);
 
         //Returns an AccessibleContext object that represents the parent of the specified object.
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-        public extern static unsafe IntPtr getAccessibleParentFromContext(Int32 vmID, IntPtr ac);
+        public extern static unsafe IntPtr getAccessibleParentFromContext(Int32 vmID, Int64 ac);
 
         //Returns detailed information about an AccessibleContext object belonging to the JVM
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-        public extern static unsafe Boolean getAccessibleContextInfo(Int32 vmID, IntPtr accessibleContext, IntPtr acInfo);
+        public extern static unsafe Boolean getAccessibleContextInfo(Int32 vmID, Int64 accessibleContext, IntPtr acInfo);
 
         //**ACCESSIBLE TEXT FUNCTIONS
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-        public extern static unsafe Boolean getAccessibleTextInfo(Int32 vmID, IntPtr AccessibleContext, IntPtr textInfo, Int32 x, Int32 y);
+        public extern static unsafe Boolean getAccessibleTextInfo(Int32 vmID, Int64 AccessibleContext, IntPtr textInfo, Int32 x, Int32 y);
 
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-        public extern static unsafe Boolean getAccessibleTextItems(Int32 vmID, IntPtr AccessibleContext, IntPtr textItems, Int32 index);
+        public extern static unsafe Boolean getAccessibleTextItems(Int32 vmID, Int64 AccessibleContext, IntPtr textItems, Int32 index);
 
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-        public extern static unsafe Boolean getAccessibleTextAttributes(Int32 vmID, IntPtr AccessibleContext, Int32 index, IntPtr attributes);
+        public extern static unsafe Boolean getAccessibleTextAttributes(Int32 vmID, Int64 AccessibleContext, Int32 index, IntPtr attributes);
 
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-        public extern static unsafe Boolean GetAccessibleTextSelectionInfo(Int32 vmID, IntPtr AccessibleContext, Int32 index, IntPtr textSelection);
+        public extern static unsafe Boolean GetAccessibleTextSelectionInfo(Int32 vmID, Int64 AccessibleContext, Int32 index, IntPtr textSelection);
 
 
         //
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-        public extern static Boolean getAccessibleActions(Int32 vmID, IntPtr AccessibleContext,  IntPtr ptrAccessibleActions);
+        public extern static Boolean getAccessibleActions(Int32 vmID, Int64 AccessibleContext,  IntPtr ptrAccessibleActions);
 
 
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-        public extern static Boolean doAccessibleActions(Int32 vmID, IntPtr AccessibleContext, IntPtr actionsToDo, ref Int32 failure);
+        public extern static Boolean doAccessibleActions(Int32 vmID, Int64 AccessibleContext, IntPtr actionsToDo, ref Int32 failure);
 
 
     }

@@ -13,7 +13,7 @@ namespace JabApiLib.JavaAccessBridge
 
         public class AccessibleTreeItem
         {
-            public IntPtr acPtr;
+            public Int64 acPtr;
             public String name; // the AccessibleName of the object
             public String description; // the AccessibleDescription of the object
             public String role; // localized AccesibleRole string
@@ -40,7 +40,7 @@ namespace JabApiLib.JavaAccessBridge
                 children = new List<AccessibleTreeItem>();
             }
 
-            public AccessibleTreeItem(IntPtr acPtr, AccessibleContextInfo accessibleContextInfo)
+            public AccessibleTreeItem(Int64 acPtr, AccessibleContextInfo accessibleContextInfo)
                 : this()
             {
                 this.acPtr = acPtr;
@@ -152,12 +152,10 @@ namespace JabApiLib.JavaAccessBridge
             {
                 unsafe
                 {
-                    IntPtr acPtr;
-                    long apPtrLong;
+                    Int64 acPtr;
 
-                    if (JabApi.getAccessibleContextFromHWND(hWnd, out vmID, out apPtrLong))
+                    if (JabApi.getAccessibleContextFromHWND(hWnd, out vmID, out acPtr))
                     {
-                        acPtr = (IntPtr)apPtrLong;
                         AccessibleContextInfo ac = new AccessibleContextInfo();
                         accessibleTreeItem = GetAccessibleContextInfo(vmID, acPtr, out ac, null, 0, string.Empty); // RECURSION SEED
 
@@ -170,7 +168,7 @@ namespace JabApiLib.JavaAccessBridge
         }
 
 
-        public static AccessibleContextInfo GetAccessibleContextInfo(Int32 vmID, IntPtr ac)
+        public static AccessibleContextInfo GetAccessibleContextInfo(Int32 vmID, Int64 ac)
         {
             AccessibleContextInfo aci = new AccessibleContextInfo(); //This will be the info that we return.
 
@@ -198,7 +196,7 @@ namespace JabApiLib.JavaAccessBridge
             return new AccessibleContextInfo();
         }
 
-        public static AccessibleTextItemsInfo GetAccessibleTextInfo(Int32 vmID, IntPtr ac)
+        public static AccessibleTextItemsInfo GetAccessibleTextInfo(Int32 vmID, Int64 ac)
         {
             //Reserve memory
             IntPtr ati = Marshal.AllocHGlobal(Marshal.SizeOf(new AccessibleTextItemsInfo()));
@@ -216,7 +214,7 @@ namespace JabApiLib.JavaAccessBridge
 
 
 
-        private static AccessibleTreeItem GetAccessibleContextInfo(Int32 vmID, IntPtr currentPtr, out AccessibleContextInfo currentContext, AccessibleTreeItem parentItem, int level, string lineage)
+        private static AccessibleTreeItem GetAccessibleContextInfo(Int32 vmID, Int64 currentPtr, out AccessibleContextInfo currentContext, AccessibleTreeItem parentItem, int level, string lineage)
         {
             unsafe
             {
@@ -272,7 +270,7 @@ namespace JabApiLib.JavaAccessBridge
                                     if (currentContext.role_en_US != "unknown" && currentContext.states_en_US.Contains("visible")) // Note the optomization here, I found this get me to an acceptable speed
                                     {
                                         AccessibleContextInfo childContext = new AccessibleContextInfo();
-                                        IntPtr childPtr = JabApi.getAccessibleChildFromContext(vmID, currentPtr, i);
+                                        Int64 childPtr = JabApi.getAccessibleChildFromContext(vmID, currentPtr, i);
 
                                         GetAccessibleContextInfo(vmID, childPtr, out childContext, newItem, nextLevel, currentlineage);
 
@@ -310,7 +308,7 @@ namespace JabApiLib.JavaAccessBridge
         }
 
 
-        private static AccessibleTreeItem BuildAccessibleTree(IntPtr acPtr, AccessibleContextInfo acInfo, AccessibleTreeItem parentItem)
+        private static AccessibleTreeItem BuildAccessibleTree(Int64 acPtr, AccessibleContextInfo acInfo, AccessibleTreeItem parentItem)
         {
             if (!ReferenceEquals(acInfo, null))
             {
@@ -326,7 +324,7 @@ namespace JabApiLib.JavaAccessBridge
         }
 
         // 追加分
-        public static Boolean GetAccessibleActions(Int32 vmID, IntPtr AccessibleContext, out AccessibleActions accessibleActions)
+        public static Boolean GetAccessibleActions(Int32 vmID, Int64 AccessibleContext, out AccessibleActions accessibleActions)
         {
             accessibleActions = new AccessibleActions();
             IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf(accessibleActions));
@@ -335,7 +333,7 @@ namespace JabApiLib.JavaAccessBridge
             accessibleActions = (AccessibleActions)Marshal.PtrToStructure(ptr, typeof(AccessibleActions));
             return ret;
         }
-        public static List<String> GetAccessibleActionsList(Int32 vmID, IntPtr AccessibleContext)
+        public static List<String> GetAccessibleActionsList(Int32 vmID, Int64 AccessibleContext)
         {
             List<String> result = new List<String>();
             AccessibleActions actions;
@@ -351,7 +349,7 @@ namespace JabApiLib.JavaAccessBridge
 
             return result;
         }
-        public static Boolean DoAccessibleActions(Int32 vmID, IntPtr AccessibleContext, string action)
+        public static Boolean DoAccessibleActions(Int32 vmID, Int64 AccessibleContext, string action)
         {
             AccessibleActionsToDo actionTodo = new AccessibleActionsToDo();
             actionTodo.actionsCount = 1;
