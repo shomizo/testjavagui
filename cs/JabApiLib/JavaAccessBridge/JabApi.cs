@@ -135,7 +135,7 @@ namespace JabApiLib.JavaAccessBridge
     public static class JabApi
     {
 
-        public const String WinAccessBridgeDll = @"WindowsAccessBridge.dll";
+        public const String WinAccessBridgeDll = @"WindowsAccessBridge-32.dll";
         public const Int32 MAX_STRING_SIZE = 1024;
         public const Int32 SHORT_STRING_SIZE = 256;
 
@@ -347,14 +347,14 @@ namespace JabApiLib.JavaAccessBridge
         public extern static unsafe IntPtr getNextJavaWindow(IntPtr hwnd);
 
         //Returns ac from window handle.
-        [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-        public extern static unsafe Boolean getAccessibleContextFromHWND(IntPtr hwnd, out Int32 vmID, out IntPtr ac);
+        //[DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
+        //public extern static unsafe Boolean getAccessibleContextFromHWND(IntPtr hwnd, out Int32 vmID, out IntPtr ac);
 
         //#if WOW64 // using x64
 
-        //[return: MarshalAs(UnmanagedType.Bool)]
-        //[DllImport("WindowsAccessBridge-32.dll", CallingConvention = CallingConvention.Cdecl)]
-        //public extern static unsafe Boolean getAccessibleContextFromHWND(IntPtr hwnd, out Int32 vmID, out Int64 acParent);
+        [return: MarshalAs(UnmanagedType.Bool)]
+        [DllImport("WindowsAccessBridge-32.dll", CallingConvention = CallingConvention.Cdecl)]
+        public extern static unsafe Boolean getAccessibleContextFromHWND(IntPtr hwnd, out Int32 vmID, out Int64 acParent);
 
         //#else // using x86
 

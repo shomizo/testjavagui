@@ -153,11 +153,11 @@ namespace JabApiLib.JavaAccessBridge
                 unsafe
                 {
                     IntPtr acPtr;
-                    //long apPtrLong;
+                    long apPtrLong;
 
-                    if (JabApi.getAccessibleContextFromHWND(hWnd, out vmID, out acPtr) == false )
+                    if (JabApi.getAccessibleContextFromHWND(hWnd, out vmID, out apPtrLong))
                     {
-                      //  acPtr = (IntPtr)apPtrLong;
+                        acPtr = (IntPtr)apPtrLong;
                         AccessibleContextInfo ac = new AccessibleContextInfo();
                         accessibleTreeItem = GetAccessibleContextInfo(vmID, acPtr, out ac, null, 0, string.Empty); // RECURSION SEED
 
