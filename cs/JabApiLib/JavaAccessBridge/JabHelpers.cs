@@ -379,5 +379,16 @@ namespace JabApiLib.JavaAccessBridge
             System.Windows.Forms.Application.DoEvents();
         }
 
+        public static AccessibleTreeItem TrackTree(AccessibleTreeItem tree, int[] targetIdx)
+        {
+            AccessibleTreeItem target;
+            target = tree;
+            for (int i = 0; i < targetIdx.Length; i++)
+            {
+                target = target.children[targetIdx[i]];
+            }
+            return target;
+        }
+
     }
 }

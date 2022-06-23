@@ -226,7 +226,7 @@ namespace JabApiLib.JavaAccessBridge
         #region Event Delegates
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void PropertyChangeDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac,
+        public delegate void PropertyChangeDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac,
             [MarshalAs(UnmanagedType.LPWStr)] string property, [MarshalAs(UnmanagedType.LPWStr)] string oldValue, [MarshalAs(UnmanagedType.LPWStr)] string newValue);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -234,89 +234,89 @@ namespace JabApiLib.JavaAccessBridge
 
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void FocusGainedDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac);
+        public delegate void FocusGainedDelegate(System.Int32 vmID, AcPtr jevent, AcPtr ac);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void FocusLostDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac);
-
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void CaretUpdateDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac);
+        public delegate void FocusLostDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac);
 
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void MouseClickedDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void MouseEnteredDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void MouseExitedDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void MousePressedDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac);
-
-        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void MouseReleasedDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac);
+        public delegate void CaretUpdateDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac);
 
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void MenuCanceledDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac);
+        public delegate void MouseClickedDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void MenuDeselectedDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac);
+        public delegate void MouseEnteredDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void MenuSelectedDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac);
+        public delegate void MouseExitedDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void PopupMenuCanceledDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac);
+        public delegate void MousePressedDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void PopupMenuWillBecomeInvisibleDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac);
+        public delegate void MouseReleasedDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac);
+
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void PopupMenuWillBecomeVisibleDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac);
+        public delegate void MenuCanceledDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void PropertyNameChangeDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac,
+        public delegate void MenuDeselectedDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void MenuSelectedDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void PopupMenuCanceledDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void PopupMenuWillBecomeInvisibleDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void PopupMenuWillBecomeVisibleDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void PropertyNameChangeDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac,
             [MarshalAs(UnmanagedType.LPWStr)] string oldName, [MarshalAs(UnmanagedType.LPWStr)] string newName);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void PropertyDescriptionChangeDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac,
+        public delegate void PropertyDescriptionChangeDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac,
             [MarshalAs(UnmanagedType.LPWStr)] string oldDescription, [MarshalAs(UnmanagedType.LPWStr)] string newDescription);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void PropertyStateChangeDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac,
+        public delegate void PropertyStateChangeDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac,
             [MarshalAs(UnmanagedType.LPWStr)] string oldState, [MarshalAs(UnmanagedType.LPWStr)] string newState);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void PropertyValueChangeDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac,
+        public delegate void PropertyValueChangeDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac,
             [MarshalAs(UnmanagedType.LPWStr)] string oldValue, [MarshalAs(UnmanagedType.LPWStr)] string newValue);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void PropertySelectionChangeDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac);
+        public delegate void PropertySelectionChangeDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void PropertyTextChangeDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac);
+        public delegate void PropertyTextChangeDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void PropertyCaretChangeDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac,
+        public delegate void PropertyCaretChangeDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac,
         Int32 oldPosition, Int32 newPosition);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void PropertyVisibleDataChangeDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac);
+        public delegate void PropertyVisibleDataChangeDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void PropertyChildChangeDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac,
+        public delegate void PropertyChildChangeDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac,
         IntPtr oldChild, IntPtr newChild);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void PropertyActiveDescendentChangeDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac,
+        public delegate void PropertyActiveDescendentChangeDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac,
         IntPtr oldActiveDescendent, IntPtr newActiveDescendent);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void PropertyTableModelChangeDelegate(System.Int32 vmID, IntPtr jevent, IntPtr ac,
+        public delegate void PropertyTableModelChangeDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac,
         IntPtr oldValue, IntPtr newValue);
 
         #endregion Event Delegates
@@ -337,7 +337,7 @@ namespace JabApiLib.JavaAccessBridge
 
         //Sets the text of the given accessible context.
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-        public extern static void setTextContents(Int32 vmID, IntPtr ac, [MarshalAs(UnmanagedType.LPWStr)] string text);
+        public extern static void setTextContents(Int32 vmID, AcPtr ac, [MarshalAs(UnmanagedType.LPWStr)] string text);
 
         //Gets basic version info about JVM/JAB
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
@@ -349,7 +349,7 @@ namespace JabApiLib.JavaAccessBridge
 
         //Returns ac from window handle.
         //[DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-        //public extern static unsafe Boolean getAccessibleContextFromHWND(IntPtr hwnd, out Int32 vmID, out IntPtr ac);
+        //public extern static unsafe Boolean getAccessibleContextFromHWND(IntPtr hwnd, out Int32 vmID, out AcPtr ac);
 
         //#if WOW64 // using x64
 
