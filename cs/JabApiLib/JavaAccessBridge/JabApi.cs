@@ -323,6 +323,7 @@ namespace JabApiLib.JavaAccessBridge
 
         #endregion DLLImport - Functions
 
+
         //Inits the JAB.
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
         public extern static void Windows_run();
@@ -336,8 +337,14 @@ namespace JabApiLib.JavaAccessBridge
         public extern static void releaseJavaObject(Int32 vmID, IntPtr javaObject);
 
         //Sets the text of the given accessible context.
+        [return: MarshalAs(UnmanagedType.Bool)]
+        [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
+        public extern static bool setTextContents(Int32 vmID, AcPtr ac, [MarshalAs(UnmanagedType.LPWStr)] string text);
+        //public extern static void setTextContents(Int32 vmID, AcPtr ac, [MarshalAs(UnmanagedType.LPWStr)] string text);
+
+        [return: MarshalAs(UnmanagedType.Bool)]
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-        public extern static void setTextContents(Int32 vmID, AcPtr ac, [MarshalAs(UnmanagedType.LPWStr)] string text);
+        public extern static bool requestFocus(Int32 vmID, AcPtr ac);
 
         //Gets basic version info about JVM/JAB
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
