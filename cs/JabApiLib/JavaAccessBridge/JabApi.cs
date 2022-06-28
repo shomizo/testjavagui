@@ -334,7 +334,7 @@ namespace JabApiLib.JavaAccessBridge
 
         //Releases the specified java object.
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-        public extern static void releaseJavaObject(Int32 vmID, IntPtr javaObject);
+        public extern static void releaseJavaObject(Int32 vmID, AcPtr javaObject);
 
         //Sets the text of the given accessible context.
         [return: MarshalAs(UnmanagedType.Bool)]
