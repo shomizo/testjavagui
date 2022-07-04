@@ -33,6 +33,7 @@ namespace JabApiLib.JavaAccessBridge
             public Boolean accessibleText; // implement the additional interface
             public Boolean accessibleInterfaces;
             public string textValue;
+            public AccessibleTreeItem parent;
 
             public List<AccessibleTreeItem> children;
 
@@ -267,9 +268,10 @@ namespace JabApiLib.JavaAccessBridge
                                     else
                                         currentlineage = lineage + ", " + i.ToString();
 
-                                    if (currentContext.role_en_US != "unknown" && currentContext.states_en_US.Contains("visible")) // Note the optomization here, I found this get me to an acceptable speed
+                                    //if (currentContext.role_en_US != "unknown" && currentContext.states_en_US.Contains("visible")) // Note the optomization here, I found this get me to an acceptable speed
+                                    if (currentContext.role_en_US != "unknown" ) // by mizo 20220706  visibleの条件があると取得できないオブジェクトがある。
                                     {
-                                        AccessibleContextInfo childContext = new AccessibleContextInfo();
+                                            AccessibleContextInfo childContext = new AccessibleContextInfo();
                                         AcPtr childPtr = JabApi.getAccessibleChildFromContext(vmID, currentPtr, i);
 
                                         GetAccessibleContextInfo(vmID, childPtr, out childContext, newItem, nextLevel, currentlineage);
@@ -280,7 +282,6 @@ namespace JabApiLib.JavaAccessBridge
 
                                 }
                             }
-
                             return newItem;
                         }
                     }
@@ -313,6 +314,7 @@ namespace JabApiLib.JavaAccessBridge
             if (!ReferenceEquals(acInfo, null))
             {
                 AccessibleTreeItem item = new AccessibleTreeItem(acPtr, acInfo);
+                item.parent = parentItem;
                 if (!ReferenceEquals(parentItem, null))
                 {
                     screenContents.Add(item);
