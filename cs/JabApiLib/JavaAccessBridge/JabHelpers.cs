@@ -244,13 +244,13 @@ namespace JabApiLib.JavaAccessBridge
 
                                     string treeInfo = Repeat("\t", level) + currentContext.name + " = \"" + textItem.sentence + "\"";
                                     screenContentsString += treeInfo + Environment.NewLine;
-                                    Debug.Print(treeInfo);
+                                    //Debug.Print(treeInfo);
                                 }
                                 else
                                 {
                                     string treeInfo = Repeat("\t", level) + currentContext.name;
                                     screenContentsString += treeInfo + Environment.NewLine;
-                                    Debug.Print(treeInfo);
+                                    //Debug.Print(treeInfo);
                                 }
 
 
@@ -260,7 +260,7 @@ namespace JabApiLib.JavaAccessBridge
                                 {
                                     string lineageInfo = Repeat("\t", level) + level.ToString() + " Child " + i.ToString() + " Lineage = {" + lineage + "}";
                                     screenContentsString += lineageInfo + Environment.NewLine;
-                                    Debug.Print(lineageInfo);
+                                    //Debug.Print(lineageInfo);
 
                                     string currentlineage;
                                     if (lineage == string.Empty)
