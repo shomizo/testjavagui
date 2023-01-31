@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Diagnostics.CodeAnalysis;
+#if x86
+using AcPtr = System.Int32;
+#else
 using AcPtr = System.Int64;
-
+#endif
 namespace JabApiLib.JavaAccessBridge
 {
-    #region Structures
+#region Structures
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     public struct VersionInfo
@@ -129,7 +132,7 @@ namespace JabApiLib.JavaAccessBridge
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
         public AccessibleActionInfo[] actions;// the accessible actions to do
     }
-    #endregion Structures
+#endregion Structures
 
 
 
@@ -140,8 +143,8 @@ namespace JabApiLib.JavaAccessBridge
         public const Int32 MAX_STRING_SIZE = 1024;
         public const Int32 SHORT_STRING_SIZE = 256;
 
-        #region Event Handlers
-        #region EventDLLImport
+#region Event Handlers
+#region EventDLLImport
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
         public extern static void setMouseClickedFP(MouseClickedDelegate fp);
 
@@ -222,8 +225,8 @@ namespace JabApiLib.JavaAccessBridge
 
         [DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
         public extern static void setPropertyVisibleDataChangeFP(PropertyVisibleDataChangeDelegate fp);
-        #endregion EventDLLImport
-        #region Event Delegates
+#endregion EventDLLImport
+#region Event Delegates
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void PropertyChangeDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac,
@@ -319,9 +322,9 @@ namespace JabApiLib.JavaAccessBridge
         public delegate void PropertyTableModelChangeDelegate(System.Int32 vmID, IntPtr jevent, AcPtr ac,
         IntPtr oldValue, IntPtr newValue);
 
-        #endregion Event Delegates
+#endregion Event Delegates
 
-        #endregion DLLImport - Functions
+#endregion DLLImport - Functions
 
 
         //Inits the JAB.

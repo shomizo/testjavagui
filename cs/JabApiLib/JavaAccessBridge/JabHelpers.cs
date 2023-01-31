@@ -3,8 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Diagnostics;
+#if x86
+using AcPtr = System.Int32;
+#else
 using AcPtr = System.Int64;
-
+#endif
 namespace JabApiLib.JavaAccessBridge
 {
     public static class JabHelpers
@@ -82,7 +85,7 @@ namespace JabApiLib.JavaAccessBridge
 
         internal class ItemComparer : IComparer<AccessibleTreeItem>
         {
-            #region IComparer<IReader> Members
+#region IComparer<IReader> Members
 
             public int Compare(AccessibleTreeItem x, AccessibleTreeItem y)
             {
@@ -100,7 +103,7 @@ namespace JabApiLib.JavaAccessBridge
                 }
             }
 
-            #endregion
+#endregion
         }
 
         private static List<AccessibleTreeItem> screenContents = new List<AccessibleTreeItem>();
