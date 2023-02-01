@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Diagnostics;
 #if x86
-using AcPtr = System.Int32;
+using AcPtr = System.Int64;
 #else
 using AcPtr = System.Int64;
 #endif
@@ -292,6 +292,11 @@ namespace JabApiLib.JavaAccessBridge
                     {
                         currentContext = new AccessibleContextInfo();
                     }
+                }
+                catch (Exception e)
+                {
+                    currentContext = new AccessibleContextInfo();
+                    ;
                 }
                 finally
                 {

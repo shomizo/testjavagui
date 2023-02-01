@@ -4,7 +4,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Diagnostics.CodeAnalysis;
 #if x86
-using AcPtr = System.Int32;
+using AcPtr = System.Int64;
 #else
 using AcPtr = System.Int64;
 #endif
@@ -139,7 +139,11 @@ namespace JabApiLib.JavaAccessBridge
     public static class JabApi
     {
 
+#if x86
         public const String WinAccessBridgeDll = @"WindowsAccessBridge-32.dll";
+#else
+        public const String WinAccessBridgeDll = @"WindowsAccessBridge-32.dll";
+#endif
         public const Int32 MAX_STRING_SIZE = 1024;
         public const Int32 SHORT_STRING_SIZE = 256;
 
@@ -361,27 +365,30 @@ namespace JabApiLib.JavaAccessBridge
         //[DllImport(WinAccessBridgeDll, SetLastError = true, ThrowOnUnmappableChar = true, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
         //public extern static unsafe Boolean getAccessibleContextFromHWND(IntPtr hwnd, out Int32 vmID, out AcPtr ac);
 
+// #if x86
+        //[return: MarshalAs(UnmanagedType.Bool)]
+        //[DllImport(WinAccessBridgeDll, EntryPoint = "getAccessibleContextFromHWND", CallingConvention = CallingConvention.Cdecl)]
+        //private extern static unsafe Boolean _getAccessibleContextFromHWND(IntPtr hwnd, out Int32 vmID, out Int32 acParent);
+
+        //public static bool getAccessibleContextFromHWND(IntPtr hwnd, out Int32 vmID, out AcPtr acParent)
+        //{
+        //    Int32 _acParent;
+
+        //    bool retVal = _getAccessibleContextFromHWND(hwnd, out vmID, out _acParent);
+        //    acParent = _acParent;
+
+        //    return retVal;
+        //    //return vmID != 0;
+        //}
+
+
         //#if WOW64 // using x64
 
         [return: MarshalAs(UnmanagedType.Bool)]
-        [DllImport("WindowsAccessBridge-32.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(WinAccessBridgeDll, CallingConvention = CallingConvention.Cdecl)]
         public extern static unsafe Boolean getAccessibleContextFromHWND(IntPtr hwnd, out Int32 vmID, out AcPtr acParent);
-
         //#else // using x86
 
-        //        [return: MarshalAs(UnmanagedType.Bool)]
-        //        [DllImport("WindowsAccessBridge.dll", EntryPoint = "getAccessibleContextFromHWND", CallingConvention = CallingConvention.Cdecl)]
-        //        private extern static unsafe Boolean _getAccessibleContextFromHWND(IntPtr hwnd, out Int32 vmID, out Int32 acParent);
-
-        //        public static bool getAccessibleContextFromHWND(IntPtr hwnd, out Int32 vmID, out Int64 acParent)
-        //        {
-        //            Int32 _acParent;
-
-        //            bool retVal = _getAccessibleContextFromHWND(hwnd, out vmID, out _acParent);
-        //            acParent = _acParent;
-
-        //            return retVal;
-        //        }
 
         //#endif
 
